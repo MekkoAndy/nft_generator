@@ -1,0 +1,13 @@
+{
+  "project_name": "#99_test",
+  "main_path": "My files/Linux files/development/nft_generators/gif/",
+  "random_items_list": [[], [], []],
+  "picture_limit": 1000,
+  "rare_picture_limit": 0,
+  "legendary_picture_limit": 0,
+  "make_dirs": true,
+  "process_data": true,
+  "prepare_metadata": true,
+  "launch_generation": true,
+  "mess_module": true
+}
