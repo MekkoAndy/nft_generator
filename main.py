@@ -1,4 +1,4 @@
 if __name__ == '__main__':
-    from Forward_func import forward
+    from Generator import generate_nft
     import json
-    forward(*list(json.load(open('params.json', 'r')).values()))
+    generate_nft()

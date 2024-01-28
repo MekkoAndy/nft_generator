@@ -1,0 +1,19 @@
+prerequirements:
+{
+all content must be same dimentions[frame rate for gif]
+}
+
+
+logic:
+{
+log writer
+log checker[start/continue functionality]
+provide asset path
+asset analyzer script[user must provide a layer number for each folder in asset]
+generation amount
+rarity type[how many categories(type_1 -- common, rare and legendary; type_2 -- common, uncommon, rare, mythic, legendary)]
+rarity score mode[random or exact number for each rarity type, asset layer and specific asset img]
+metadata writer type[type_1 -- index.php method, type_2 -- standart *.json nft metadata format]
+include rariry score in metadata[bool]
+include messless functionality[bool - prevent from bad layer/img conbinations(a list of bad combinations should be provided)]
+}
