@@ -1,6 +1,8 @@
+import enum
+
 from dataclasses import dataclass
 from pathlib import Path
-import enum
+from PIL import Image
 
 
 class RarityType(enum.Enum):
@@ -40,9 +42,10 @@ class GifMetadata:
 
 @dataclass
 class ContentAttributes:
-    widht: int
+    width: int
     height: int
     gif_data: GifMetadata
+    layer_order: list[str]
     total_generation_amount: int = 0
     compress: int = 0
     optimize: bool = False
@@ -61,14 +64,44 @@ class Metadata:
 
 
 @dataclass
-class ProjectMetadada():
+class ProjectHierarchy:
+    main: Path
+    asset: Path
+    generated: Path
+    metadata: Path
+
+
+@dataclass
+class AssetImage:
     name: str
-    path: Path
-    asset_path: Path
+    data: Image
+    rarity_idx: int
+
+@dataclass
+class AssetFolder:
+    name: str
+    data: [AssetImage]
+    exclude_combination: list[int]
+
+@dataclass
+class AssetData:
+    data: list[AssetFolder]
+    randomizer_limits: list[int]
+
+@dataclass
+class Content:
+    asset: AssetData
+    attributes: ContentAttributes
+
+
+@dataclass
+class Project:
+    name: str
+    path: ProjectHierarchy
     rarity: Rarity
     metadata: Metadata
     mess_module: MessModule
-    content_attributes: ContentAttributes
+    content: Content
 
 
 @dataclass
@@ -78,7 +111,7 @@ class Messenger:
     rarity_score_full_random = "Include rarity score in nft's metadata? "
     metadata_type = "Choose metadata format: "
     mess_module_cases_amount = "Отвечает за упорядочивание сложной структуры проекта. Если есть исключающие друг друга слои или итемы, нужно модуль включить и заполнить. Inter Amount of mess-cases to proceed"
-    content_attributes_widht = "NFT's widht. Input 0 for no changes: "
+    content_attributes_width = "NFT's width. Input 0 for no changes: "
     content_attributes_height = "NFT's height. Input 0 for no changes: "
     content_attributes_compression = "NFT's compression in %. Input 0 for no changes: "
     content_attributes_total_amount = "NFT's total amount to generate: "
@@ -86,3 +119,4 @@ class Messenger:
     content_attributes_gif_duration = "GIF duration"
     content_attributes_gif_framerate = "GIF framerate"
     content_attributes_gif_loop = "GIF looping"
+    content_attributes_asset_layering = f"Inter a sequence of asset layers wich will be used in image composing. New assets layer order:"
